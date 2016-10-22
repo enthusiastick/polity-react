@@ -24,12 +24,14 @@ ActiveRecord::Schema.define(version: 20161022175126) do
     t.string   "handle",                 null: false
     t.string   "identifier",             null: false
     t.string   "last_name",              null: false
+    t.string   "password_digest"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["handle"], name: "index_users_on_handle", unique: true, using: :btree
+    t.index ["identifier"], name: "index_users_on_identifier", unique: true, using: :btree
   end
 
 end

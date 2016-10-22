@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates_length_of :handle, in: 3..30
   validates_presence_of :email, :first_name, :handle, :last_name
   validates_uniqueness_of :email, :handle, :identifier
+
+  has_secure_password
 end

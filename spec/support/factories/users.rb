@@ -7,5 +7,7 @@ FactoryGirl.define do
     sequence(:handle) { |n| "user#{n}" }
     sequence(:identifier) { |n| "Alpha#{n}Numeric" }
     sequence(:last_name) { |n| "Karnstein#{n}" }
+    password "password"
+    password_confirmation "password"
   end
 end
