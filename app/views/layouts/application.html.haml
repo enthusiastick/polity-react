@@ -12,5 +12,9 @@
     = csrf_meta_tag
 
   %body
-
+    - flash.each do |name, msg|
+      %div{ class: name + " callout", data: { closable: "" }}
+        = content_tag :span, msg
+        %button.close-button{ "aria-label": "Dismiss alert", data: { close: "" }, type: "button" }
+          %span{ "aria-hidden": true } &times;
     = yield

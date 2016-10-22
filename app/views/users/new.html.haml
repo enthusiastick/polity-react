@@ -1,0 +1,37 @@
+.row
+  .small-12.columns
+    %h1.text-center Sign Up
+    =form_for @user do |f|
+      .form-errors
+        -if @user.errors.present?
+          .callout.alert
+            %ul
+              -@user.errors.messages.each do |attribute, messages|
+                %li
+                  %strong
+                    =attribute.to_s.humanize
+                  ="#{messages.to_sentence}."
+      .form-inputs
+        %fieldset
+          =f.label :handle, "Username"
+          =f.text_field :handle
+        %fieldset
+          =f.label :email
+          =f.email_field :email
+        .row
+          .small-12.medium-6.columns
+            %fieldset
+              =f.label :first_name
+              =f.text_field :first_name, label: "First Name"
+          .small-12.medium-6.columns
+            %fieldset
+              =f.label :last_name
+              =f.text_field :last_name, label: "Last Name"
+        %fieldset
+          =f.label :password
+          =f.password_field :password
+        %fieldset
+          =f.label :password_confirmation
+          =f.password_field :password_confirmation
+      .form-actions
+        =f.submit "Register", class: "button"
