@@ -33,6 +33,7 @@ end
 group :test do
   gem "capybara"
   gem "capybara-email"
+  gem "coveralls", require: false
   gem "factory_girl_rails"
   gem "launchy"
   gem "shoulda-matchers"
