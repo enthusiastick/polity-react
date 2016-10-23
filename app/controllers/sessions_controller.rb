@@ -7,9 +7,14 @@ class SessionsController < ApplicationController
       user = User.find_by(handle: params[:session][:login])
     end
     if user && user.authenticate(params[:session][:password])
-      flash[:success] = "Signed in as #{user.handle}."
-      sign_in(user)
-      redirect_to root_path
+      if !user.confirmed_at.nil?
+        flash[:success] = "Signed in as #{user.handle}."
+        sign_in(user)
+        redirect_to root_path
+      else
+        flash.now[:alert] = "You have to confirm your email address before continuing."
+        render :new
+      end
     else
       flash.now[:alert] = "Invalid email/username & password combination."
       render :new

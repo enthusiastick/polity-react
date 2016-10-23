@@ -17,7 +17,7 @@ module AuthenticationHelpers
     click_button "Register"
   end
 
-  def sign_in_as(user)
+  def sign_in(user)
     visit sign_in_path
     fill_out_sign_in(user)
   end

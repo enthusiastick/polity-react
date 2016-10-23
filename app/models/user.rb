@@ -21,6 +21,10 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  def confirm!
+    touch(:created_at) if confirmed_at.nil?
+  end
+
   def confirmed?
     !confirmed_at.nil?
   end
