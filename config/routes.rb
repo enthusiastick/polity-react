@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   resources :account_confirmations, only: [:edit]
   resources :users, only: [:create, :edit, :update]
+
+  use_doorkeeper
 end

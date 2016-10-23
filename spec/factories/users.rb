@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     sequence(:first_name) { |n| "Carmilla#{n}" }
     sequence(:handle) { |n| "user#{n}" }
-    sequence(:identifier) { |n| "Alpha#{n}Numeric" }
+    sequence(:universally_unique_id) { |n| "Alpha#{n}Numeric" }
     sequence(:last_name) { |n| "Karnstein#{n}" }
     password "password"
     password_confirmation "password"

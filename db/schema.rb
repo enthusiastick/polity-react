@@ -10,28 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022175126) do
+ActiveRecord::Schema.define(version: 20161023141410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "oauth_access_grants", force: :cascade do |t|
+    t.integer  "resource_owner_id", null: false
+    t.integer  "application_id",    null: false
+    t.string   "token",             null: false
+    t.integer  "expires_in",        null: false
+    t.text     "redirect_uri",      null: false
+    t.datetime "created_at",        null: false
+    t.datetime "revoked_at"
+    t.string   "scopes"
+    t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
+  end
+
+  create_table "oauth_access_tokens", force: :cascade do |t|
+    t.integer  "resource_owner_id"
+    t.integer  "application_id"
+    t.string   "token",                               null: false
+    t.string   "refresh_token"
+    t.integer  "expires_in"
+    t.datetime "revoked_at"
+    t.datetime "created_at",                          null: false
+    t.string   "scopes"
+    t.string   "previous_refresh_token", default: "", null: false
+    t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+    t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
+  end
+
+  create_table "oauth_applications", force: :cascade do |t|
+    t.string   "name",                      null: false
+    t.string   "uid",                       null: false
+    t.string   "secret",                    null: false
+    t.text     "redirect_uri",              null: false
+    t.string   "scopes",       default: "", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
+    t.boolean  "admin",                  default: false
     t.string   "avatar"
     t.string   "confirmation_digest"
     t.datetime "confirmed_at"
-    t.string   "email",                  null: false
-    t.string   "first_name",             null: false
-    t.string   "handle",                 null: false
-    t.string   "identifier",             null: false
-    t.string   "last_name",              null: false
+    t.string   "email",                                  null: false
+    t.string   "first_name",                             null: false
+    t.string   "handle",                                 null: false
+    t.string   "last_name",                              null: false
     t.string   "password_digest"
     t.string   "password_reset_digest"
     t.datetime "password_reset_sent_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "universally_unique_id",                  null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["handle"], name: "index_users_on_handle", unique: true, using: :btree
-    t.index ["identifier"], name: "index_users_on_identifier", unique: true, using: :btree
+    t.index ["universally_unique_id"], name: "index_users_on_universally_unique_id", unique: true, using: :btree
   end
 
+  add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
+  add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end

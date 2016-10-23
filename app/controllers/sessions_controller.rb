@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       if !user.confirmed_at.nil?
         flash[:success] = "Signed in as #{user.handle}."
         sign_in(user)
-        redirect_to root_path
+        redirect_to post_auth_path
       else
         flash.now[:alert] = "You need to confirm your email address before continuing."
         render :new

@@ -9,10 +9,7 @@ feature "user confirms email account" do
     expect(ActionMailer::Base.deliveries.size).to eq(1)
 
     user = User.find_by(handle: "foob")
-    user.send(:generate_confirmation_digest)
-    token = user.confirmation_token
-    user.save!
-    visit edit_account_confirmation_url(token, email: user.email)
+    confirm_email(user)
 
     expect(page).to have_content("Your email address is confirmed. Thank you.")
   end

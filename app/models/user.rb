@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates_format_of :handle, with: HANDLE_REGEXP
   validates_length_of :handle, in: 3..30
   validates_presence_of :email, :first_name, :handle, :last_name
-  validates_uniqueness_of :email, :handle, :identifier
+  validates_uniqueness_of :email, :handle, :universally_unique_id
 
   def authenticated?(attribute, token)
     digest = self.send("#{attribute}_digest")
@@ -59,6 +59,6 @@ class User < ApplicationRecord
   end
 
   def generate_identifier
-    self.identifier ||= SecureRandom.uuid
+    self.universally_unique_id ||= SecureRandom.uuid
   end
 end

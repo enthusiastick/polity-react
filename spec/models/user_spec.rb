@@ -16,5 +16,5 @@ describe User, type: :model do
 
   it { should validate_uniqueness_of(:email) }
   it { should validate_uniqueness_of(:handle) }
-  it { should validate_uniqueness_of(:identifier) }
+  it { should validate_uniqueness_of(:universally_unique_id) }
 end
