@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20161022175126) do
 
   create_table "users", force: :cascade do |t|
     t.string   "avatar"
-    t.string   "confirmation_token"
+    t.string   "confirmation_digest"
     t.datetime "confirmed_at"
     t.string   "email",                  null: false
     t.string   "first_name",             null: false

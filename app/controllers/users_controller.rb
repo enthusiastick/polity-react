@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Registration successful."
+      @user.send_confirmation_email
+      flash[:success] = "Registration successful. Please confirm your email to activate your account."
       redirect_to root_path
     else
       flash.now[:alert] = "There was a problem with your registration."
