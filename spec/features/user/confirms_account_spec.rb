@@ -3,14 +3,7 @@ require "rails_helper"
 feature "user confirms email account" do
   scenario "register and confirm" do
     ActionMailer::Base.deliveries = []
-    visit sign_up_path
-    fill_in :user_handle, with: "foob"
-    fill_in :user_email, with: "foob@example.com"
-    fill_in :user_first_name, with: "Foo"
-    fill_in :user_last_name, with: "Bar"
-    fill_in :user_password, with: "password"
-    fill_in :user_password_confirmation, with: "password"
-    click_button "Register"
+    register_user
 
     expect(page).to have_content("Registration successful.")
     expect(ActionMailer::Base.deliveries.size).to eq(1)
