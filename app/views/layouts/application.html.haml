@@ -18,15 +18,18 @@
           -if user_signed_in?
             %li.menu-text Signed in as:
             %li
-              =link_to current_user.handle, "#"
+              =link_to current_user.handle, edit_user_path(current_user)
           -else
             %li.menu-text
               Not signed in.
-      -if user_signed_in?
-        .top-bar-right
-          %ul.menu
+      .top-bar-right
+        %ul.menu
+          -if user_signed_in?
             %li.sign-out
               =link_to "Sign Out", sign_out_path, method: :delete
+          -else
+            %li.sign-in
+              =link_to "Sign In", sign_in_path
     - flash.each do |name, msg|
       %div{ class: name + " callout", data: { closable: "" }}
         = content_tag :span, msg

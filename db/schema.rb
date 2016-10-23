@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20161022175126) do
     t.string   "identifier",             null: false
     t.string   "last_name",              null: false
     t.string   "password_digest"
-    t.string   "password_reset_token"
+    t.string   "password_reset_digest"
     t.datetime "password_reset_sent_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

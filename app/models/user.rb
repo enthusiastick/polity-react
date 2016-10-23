@@ -22,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def confirm!
-    touch(:created_at) if confirmed_at.nil?
+    touch(:confirmed_at) if confirmed_at.nil?
   end
 
   def confirmed?

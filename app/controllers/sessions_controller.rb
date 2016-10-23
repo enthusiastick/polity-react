@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         sign_in(user)
         redirect_to root_path
       else
-        flash.now[:alert] = "You have to confirm your email address before continuing."
+        flash.now[:alert] = "You need to confirm your email address before continuing."
         render :new
       end
     else

@@ -38,7 +38,7 @@ feature "user signs in" do
     scenario "unconfirmed email" do
       sign_in(user)
 
-      expect(page).to have_content("You have to confirm your email address before continuing.")
+      expect(page).to have_content("You need to confirm your email address before continuing.")
       expect(page).to_not have_content("Sign Out")
     end
 
