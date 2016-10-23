@@ -1,3 +1,7 @@
 .row
   .small-12.columns
-    %p Hello world!
+    %p
+      -if user_signed_in?
+        ="Hello #{current_user.handle}!"
+      -else
+        Hello world!

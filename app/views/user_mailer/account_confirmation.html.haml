@@ -1,5 +1,4 @@
 %p
-  Hi #{@user.first_name},
-%p
-  Welcome to Polity at enthusiastick.io! Click on the link below to confirm your email address and activate your account:
-  =link_to edit_account_confirmation_url(@token, email: @user.email), edit_account_confirmation_url(@token, email: @user.email)
+  #{@user.full_name}, welcome to Polity at enthusiastick.io! Click on
+  =link_to "this link", edit_account_confirmation_url(@token, email: @user.email)
+  to confirm your email address and activate your account.

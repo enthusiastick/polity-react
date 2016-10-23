@@ -1,0 +1,11 @@
+.row
+  .small-12.columns
+    %h1.text-center Sign In
+    =form_for :session, url: sign_in_path do |f|
+      %fieldset
+        =f.label :email_or_username
+        =f.text_field :login
+      %fieldset
+        =f.label :password
+        =f.password_field :password
+      =f.submit "Sign In", class: "button"

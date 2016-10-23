@@ -25,8 +25,16 @@ class User < ApplicationRecord
     !confirmed_at.nil?
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def send_confirmation_email
     UserMailer.account_confirmation(self.id, self.confirmation_token).deliver_now
+  end
+
+  def to_param
+    handle
   end
 
   def User.digest(string)

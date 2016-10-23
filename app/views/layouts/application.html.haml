@@ -12,6 +12,21 @@
     = csrf_meta_tag
 
   %body
+    .top-bar
+      .top-bar-left
+        %ul.menu
+          -if user_signed_in?
+            %li.menu-text Signed in as:
+            %li
+              =link_to current_user.handle, "#"
+          -else
+            %li.menu-text
+              Not signed in.
+      -if user_signed_in?
+        .top-bar-right
+          %ul.menu
+            %li.sign-out
+              =link_to "Sign Out", sign_out_path, method: :delete
     - flash.each do |name, msg|
       %div{ class: name + " callout", data: { closable: "" }}
         = content_tag :span, msg
