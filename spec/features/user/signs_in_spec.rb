@@ -12,7 +12,10 @@ feature "user signs in" do
     end
 
     scenario "via username" do
-      sign_in(user)
+      visit sign_in_path
+      fill_in :session_login, with: user.handle
+      fill_in :session_password, with: user.password
+      click_button "Sign In"
 
       expect(page).to have_content("Signed in")
       expect(page).to have_content user.handle
@@ -36,10 +39,11 @@ feature "user signs in" do
     end
 
     scenario "unconfirmed email" do
+      user.update(confirmed_at: nil)
       sign_in(user)
 
       expect(page).to have_content("You need to confirm your email address before continuing.")
-      expect(page).to_not have_content("Sign Out")
+      expect(page).to_not have_link("Sign Out")
     end
 
     scenario "wrong details" do

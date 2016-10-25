@@ -17,7 +17,7 @@ describe Api::V1::UsersController, type: :controller do
     end
 
     context "registered user, no access token" do
-      let(:second_user) { create(:second_user) }
+      let(:second_user) { create(:user) }
       let(:no_token_params) { {} }
       it "returns nothing" do
         get :show, params: no_token_params

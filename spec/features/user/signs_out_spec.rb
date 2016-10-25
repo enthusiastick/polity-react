@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "user signs out" do
   scenario "authenticated confirmed user signs out" do
-    sign_in(FactoryGirl.create(:confirmed_user))
+    sign_in(FactoryGirl.create(:user))
     click_link "Sign Out"
 
     expect(page).to have_content("Signed out.")

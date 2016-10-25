@@ -2,6 +2,7 @@ require "factory_girl"
 
 FactoryGirl.define do
   factory :user do
+    confirmed_at DateTime.now
     sequence(:email) { |n| "user#{n}@example.com" }
     sequence(:first_name) { |n| "Carmilla#{n}" }
     sequence(:handle) { |n| "user#{n}" }
@@ -10,10 +11,10 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
 
-    trait :confirmed do
-      confirmed_at DateTime.now
+    trait :unconfirmed do
+      confirmed_at nil
     end
 
-    factory :confirmed_user, traits: [:confirmed]
+    factory :unconfirmed_user, traits: [:confirmed]
   end
 end

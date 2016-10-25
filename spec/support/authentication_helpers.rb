@@ -6,7 +6,7 @@ module AuthenticationHelpers
     visit edit_account_confirmation_url(token, email: user.email)
   end
 
-  def fill_out_sign_in(user, password = nil)
+  def fill_out_sign_in(user, password = nil, remember = false)
     visit sign_in_path
     fill_in :session_login, with: user.email
     if password.present?
@@ -14,6 +14,7 @@ module AuthenticationHelpers
     else
       fill_in :session_password, with: user.password
     end
+    check(:session_remember_me) unless remember
     click_button "Sign In"
   end
 
@@ -34,6 +35,15 @@ module AuthenticationHelpers
       fill_out_sign_in(user, password)
     else
       fill_out_sign_in(user)
+    end
+  end
+
+  def sign_in_and_remember(user, password = nil)
+    visit sign_in_path
+    if password.present?
+      fill_out_sign_in(user, password, true)
+    else
+      fill_out_sign_in(user, nil, true)
     end
   end
 

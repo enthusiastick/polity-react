@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :password_digest
       t.string :password_reset_digest
       t.datetime :password_reset_sent_at
+      t.string :remember_digest
       t.string :universally_unique_id, null: false
 
       t.timestamps

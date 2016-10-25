@@ -11,11 +11,31 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    if session[:user_id]
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    elsif cookies.signed[:user_id]
+      user = User.find_by(id: cookies.signed[:user_id])
+      if user.present? && user.authenticated?(:remember, cookies[:remember_token])
+        sign_in(user)
+        @current_user = user
+      end
+    end
+  end
+
+  def forget(user)
+    user.terminate_remember_digest
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
   end
 
   def persist_location!
     session[:post_auth_path] = request.path
+  end
+
+  def remember(user)
+    user.generate_remember_digest
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
   end
 
   def post_auth_path
@@ -33,7 +53,9 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
+    forget(current_user)
     session.delete(:user_id)
+    @current_user = nil
   end
 
   def user_signed_in?

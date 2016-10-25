@@ -2,7 +2,7 @@ class User < ApplicationRecord
   EMAIL_REGEXP = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   HANDLE_REGEXP = /\A[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*\z/
 
-  attr_accessor :confirmation_token, :password_reset_token
+  attr_accessor :confirmation_token, :password_reset_token, :remember_token
 
   before_create :generate_confirmation_digest
   before_save :generate_identifier
@@ -33,6 +33,11 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def generate_remember_digest
+    self.remember_token = User.new_token
+    update_attributes(remember_digest: User.digest(remember_token))
+  end
+
   def generate_reset_digest
     self.password_reset_token = User.new_token
     update_attributes(password_reset_digest: User.digest(password_reset_token), password_reset_sent_at: DateTime.now)
@@ -42,12 +47,22 @@ class User < ApplicationRecord
     (password_reset_sent_at + 2.hours).past?
   end
 
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
+
   def send_confirmation_email
     UserMailer.account_confirmation(self.id, self.confirmation_token).deliver_now
   end
 
   def send_password_reset_email
     UserMailer.password_reset(self.id, self.password_reset_token).deliver_now
+  end
+
+  def terminate_remember_digest
+    update_attributes(remember_digest: nil)
   end
 
   def to_param

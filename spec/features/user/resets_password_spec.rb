@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "user resets their password" do
-  let(:user) { create(:confirmed_user) }
+  let(:user) { create(:user) }
 
   scenario "successfully sent email upon request" do
     ActionMailer::Base.deliveries = []

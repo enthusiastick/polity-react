@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161023141410) do
     t.string   "password_digest"
     t.string   "password_reset_digest"
     t.datetime "password_reset_sent_at"
+    t.string   "remember_digest"
     t.string   "universally_unique_id",                  null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
