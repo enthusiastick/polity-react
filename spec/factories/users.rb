@@ -9,5 +9,11 @@ FactoryGirl.define do
     sequence(:universally_unique_id) { |n| "Alpha#{n}Numeric" }
     password "password"
     password_confirmation "password"
+
+    trait :confirmed do
+      confirmed_at DateTime.now
+    end
+
+    factory :confirmed_user, traits: [:confirmed]
   end
 end

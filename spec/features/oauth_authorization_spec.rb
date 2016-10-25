@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "user authorizes oauth client" do
-  let(:user) { FactoryGirl.create(:user, confirmed_at: DateTime.now) }
+  let(:user) { FactoryGirl.create(:confirmed_user) }
   let(:app) { FactoryGirl.create(:oauth_application) }
   let(:client) { OAuth2::Client.new(app.uid, app.secret) }
   let(:auth_url) { client.auth_code.authorize_url(redirect_uri: app.redirect_uri) }
