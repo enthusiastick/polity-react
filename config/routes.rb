@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :account_confirmations, only: [:edit]
+  resources :password_resets, only: [:create, :edit, :new, :update]
   resources :users, only: [:create, :edit, :update]
 
   use_doorkeeper

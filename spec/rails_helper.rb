@@ -24,6 +24,7 @@ end
 RSpec.configure do |config|
   config.include AuthenticationHelpers
   config.include FactoryGirl::Syntax::Methods
+  config.include PasswordHelpers
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.filter_rails_from_backtrace!
