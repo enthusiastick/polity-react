@@ -7,8 +7,12 @@
         is the single sign-on provider for all apps hosted at enthusiastick.io &ndash; your one user account here at
         %strong Polity
         is used to authenticate you to sites, experiments and web-toys found throughout the domain.
-      %p
-        If you're new to
-        %strong Polity,
-        you can
-        =link_to "sign up here.", sign_up_path
+      -if user_signed_in?
+        %p
+          Welcome back, #{current_user.first_name}.
+      -else
+        %p
+          If you're new to
+          %strong Polity,
+          you can
+          =link_to "sign up here.", sign_up_path

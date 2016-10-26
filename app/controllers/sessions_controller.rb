@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  before_action :prevent_duplicate_sign_in, only: [:create, :new]
+
   def create
     if params[:session][:login].match(User::EMAIL_REGEXP)
       user = User.find_by(email: params[:session][:login])
@@ -19,13 +21,6 @@ class SessionsController < ApplicationController
     else
       flash.now[:alert] = "Invalid email/username & password combination."
       render :new
-    end
-  end
-
-  def new
-    if user_signed_in?
-      flash[:alert] = "You are already signed in."
-      redirect_to root_path
     end
   end
 

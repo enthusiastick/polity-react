@@ -32,6 +32,13 @@ class ApplicationController < ActionController::Base
     session[:post_auth_path] = request.path
   end
 
+  def prevent_duplicate_sign_in
+    if user_signed_in?
+      flash[:alert] = "You are already signed in."
+      redirect_to root_path
+    end
+  end
+
   def remember(user)
     user.generate_remember_digest
     cookies.permanent.signed[:user_id] = user.id
