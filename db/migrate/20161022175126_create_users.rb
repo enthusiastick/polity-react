@@ -2,7 +2,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
       t.boolean :admin, default: false
-      t.string :avatar
       t.string :confirmation_digest
       t.datetime :confirmed_at
       t.string :email, null: false

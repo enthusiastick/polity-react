@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  prepend_before_action :check_captcha, only: :create
   before_action :authenticate_user!, only: [:edit, :update]
 
   def create
@@ -58,6 +59,13 @@ class UsersController < ApplicationController
     unless user == current_user
       flash[:alert] = "You are not authorized for this record."
       redirect_to root_path
+    end
+  end
+
+  def check_captcha
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      respond_with_navigational(resource) { render :new }
     end
   end
 

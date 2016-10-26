@@ -33,5 +33,6 @@
         %fieldset
           =f.label :password_confirmation
           =f.password_field :password_confirmation
+        =recaptcha_tags
       .form-actions
         =f.submit "Register", class: "button"
