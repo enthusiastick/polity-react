@@ -1,8 +1,14 @@
 .row
   .small-12.columns
     %h1.text-center.top-padded Polity
-    %p
-      -if user_signed_in?
-        ="Hello #{current_user.handle}!"
-      -else
-        Hello world!
+    .callout
+      %p
+        %strong Polity
+        is the single sign-on provider for all apps hosted at enthusiastick.io &ndash; your one user account here at
+        %strong Polity
+        is used to authenticate you to sites, experiments and web-toys found throughout the domain.
+      %p
+        If you're new to
+        %strong Polity,
+        you can
+        =link_to "sign up here.", sign_up_path
