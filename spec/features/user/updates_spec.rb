@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "user updates attributes" do
   context "signed in" do
-    let(:user) { create :user, confirmed_at: DateTime.now }
+    let(:user) { create :user, confirmed_at: Time.current }
     before do
       sign_in(user)
       visit edit_user_path(user)
@@ -51,7 +51,7 @@ feature "user updates attributes" do
     end
 
     scenario "not their user" do
-      second_user = FactoryGirl.create :user, confirmed_at: DateTime.now
+      second_user = FactoryGirl.create :user, confirmed_at: Time.current
       visit edit_user_path(second_user)
 
       expect(page).to have_content("You are not authorized for this record.")

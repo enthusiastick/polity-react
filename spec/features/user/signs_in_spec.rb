@@ -3,7 +3,7 @@ require "rails_helper"
 feature "user signs in" do
 
   context "valid account" do
-    let(:user) { create :user, confirmed_at: DateTime.now }
+    let(:user) { create :user, confirmed_at: Time.current }
     scenario "via email" do
       sign_in(user)
 

@@ -22,7 +22,7 @@ feature "user resets their password" do
 
   scenario "password cannot be reset after 2 hours" do
     user.generate_reset_digest
-    user.update(password_reset_sent_at: DateTime.now - 121.minutes)
+    user.update(password_reset_sent_at: Time.current - 121.minutes)
     change_password(user, user.password_reset_token)
 
     expect(page).to have_content("Password reset has expired.")

@@ -4,8 +4,7 @@ class User < ApplicationRecord
 
   attr_accessor :confirmation_token, :password_reset_token, :remember_token
 
-  before_create :generate_confirmation_digest
-  before_save :generate_identifier
+  before_create :generate_confirmation_digest, :generate_identifier
 
   has_secure_password
 
@@ -40,7 +39,7 @@ class User < ApplicationRecord
 
   def generate_reset_digest
     self.password_reset_token = User.new_token
-    update_attributes(password_reset_digest: User.digest(password_reset_token), password_reset_sent_at: DateTime.now)
+    update_attributes(password_reset_digest: User.digest(password_reset_token), password_reset_sent_at: Time.current)
   end
 
   def password_reset_expired?
