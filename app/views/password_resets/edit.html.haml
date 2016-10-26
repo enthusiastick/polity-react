@@ -1,6 +1,6 @@
 .row
   .small-12.columns
-    %h1.text-center Reset Password
+    %h1.text-center.top-padded Reset Password
     =form_for(@user, url: password_reset_path(params[:id])) do |f|
       .form-errors
         -if @user.errors.present?
