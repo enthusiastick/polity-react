@@ -20,7 +20,7 @@ describe SessionsController, type: :controller do
 
         expect(response.status).to eq(302)
         expect(response.cookies["remember_token"]).to_not be_nil
-        expect(cookies.permanent.signed["user_id"]).to eq(user.id)
+        expect(cookies.signed["user_id"]).to eq(user.id)
       end
     end
   end

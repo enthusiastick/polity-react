@@ -46,12 +46,6 @@ class User < ApplicationRecord
     (password_reset_sent_at + 2.hours).past?
   end
 
-  def remember(user)
-    user.remember
-    cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
-  end
-
   def send_confirmation_email
     UserMailer.account_confirmation(self.id, self.confirmation_token).deliver_now
   end

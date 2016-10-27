@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
 
   def remember(user)
     user.generate_remember_digest
-    cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
+    cookies.signed[:user_id] = { value: user.id, expires: 30.days.from_now }
+    cookies[:remember_token] = { value: user.remember_token, expires: 30.days.from_now }
   end
 
   def post_auth_path
