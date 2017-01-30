@@ -17,4 +17,5 @@
 .byebug_history
 
 .env
+.ruby-version
 /coverage
