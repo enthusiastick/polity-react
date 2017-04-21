@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     if params[:session][:login].match(User::EMAIL_REGEXP)
-      user = User.find_by(email: params[:session][:login])
+      user = User.find_by(email: params[:session][:login].downcase)
     else
       user = User.find_by(handle: params[:session][:login])
     end

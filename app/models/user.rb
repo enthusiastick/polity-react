@@ -5,6 +5,7 @@ class User < ApplicationRecord
   attr_accessor :confirmation_token, :password_reset_token, :remember_token
 
   before_create :generate_confirmation_digest, :generate_identifier
+  before_save :downcase_email
 
   has_secure_password
 
@@ -26,6 +27,10 @@ class User < ApplicationRecord
 
   def confirmed?
     !confirmed_at.nil?
+  end
+
+  def downcase_email
+    self.email.downcase!
   end
 
   def full_name
