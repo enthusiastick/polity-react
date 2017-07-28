@@ -10,7 +10,7 @@ import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-rou
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
 
-import LandingPage from '../react/components/LandingPage'
+import LandingPage from '../react/connectors/LandingPage'
 import NavigationBar from '../react/connectors/NavigationBar'
 
 import currentUser from '../react/reducers/currentUser'
