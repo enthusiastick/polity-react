@@ -1,4 +1,4 @@
-class Api::V1::UsersController < Api::V1::ApiController
+class Api::V1::UsersController < Api::ApiController
   before_action :doorkeeper_authorize!
 
   def show
