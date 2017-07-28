@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user updates attributes" do
+xfeature "user updates attributes" do
   context "signed in" do
     let(:user) { create :user, confirmed_at: Time.current }
     before do
