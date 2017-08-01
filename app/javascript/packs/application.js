@@ -1,32 +1,35 @@
 import 'whatwg-fetch'
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { Route } from 'react-router'
+
 import createBrowserHistory from 'history/createBrowserHistory'
-import { BrowserRouter } from 'react-router-dom'
-import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
+import { Route } from 'react-router'
+
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
 
 import LandingPage from '../react/connectors/LandingPage'
 import NavigationBar from '../react/connectors/NavigationBar'
+import SignIn from '../react/connectors/SignIn'
 
 import currentUser from '../react/reducers/currentUser'
 
-const browserHistory = createBrowserHistory()
+const history = createBrowserHistory()
+
+const middlewares = [thunkMiddleware, routerMiddleware(history)]
 
 const store = createStore(
   combineReducers({
     currentUser,
     form: formReducer,
-    routing: routerReducer
+    router: routerReducer
   }),
-  applyMiddleware(thunkMiddleware, routerMiddleware(browserHistory))
+  applyMiddleware(...middlewares)
 )
-
-const history = syncHistoryWithStore(browserHistory, store)
 
 document.addEventListener('DOMContentLoaded', () => {
   let reactElement = document.getElementById('react-app')
@@ -34,12 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (reactElement) {
     ReactDOM.render(
       <Provider store={store}>
-        <BrowserRouter history={history}>
+        <ConnectedRouter history={history}>
           <div>
             <Route path='/' component={NavigationBar} />
             <Route exact path='/' component={LandingPage} />
+            <Route exact path='/sign-in' component={SignIn} />
           </div>
-        </BrowserRouter>
+        </ConnectedRouter>
       </Provider>,
       reactElement
     )

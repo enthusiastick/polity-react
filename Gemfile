@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.10.0"
 gem "bcrypt"
 gem "coffee-rails", "~> 4.2"
 gem "doorkeeper"
