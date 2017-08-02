@@ -1,9 +1,9 @@
 import React from 'react'
 import { change, reduxForm } from 'redux-form'
+import { push } from 'react-router-redux'
 
 import SignInForm from '../components/SignInForm'
 import { createSession } from '../actions/createSession'
-import { pushRoot } from '../actions/pushRoot'
 
 let validate = fields => {
   const errors = {}
@@ -13,7 +13,7 @@ let validate = fields => {
 
 let onSubmit = (values, dispatch) => {
   return dispatch(createSession(values))
-  .then(() => { return dispatch(pushRoot()) })
+  .then(dispatch(push('/')))
 }
 
 const SignInFormContainer = props => {

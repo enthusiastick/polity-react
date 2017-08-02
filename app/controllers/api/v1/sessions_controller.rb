@@ -4,7 +4,7 @@ class Api::V1::SessionsController < Api::ApiController
     if authenticator.authenticated?
       sign_in(authenticator.user)
       remember(authenticator.user) if authenticator.remember_me?
-      render json: authenticator.user, adapter: :json, status: :created
+      render json: { user: authenticator.user }, status: :created
     else
       if authenticator.confirmed?
         render json: { error: "Invalid email/username & password combination." }, status: :unauthorized

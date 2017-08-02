@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20161023141410) do
 
   create_table "users", force: :cascade do |t|
     t.boolean  "admin",                  default: false
-    t.string   "avatar"
     t.string   "confirmation_digest"
     t.datetime "confirmed_at"
     t.string   "email",                                  null: false
