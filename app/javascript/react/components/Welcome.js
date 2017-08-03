@@ -4,7 +4,7 @@ const Welcome = props => {
   let lastLine
 
   if (props.currentUser.id) {
-    lastLine = <p>Welcome back, {props.currentUser.first_name}.</p>
+    lastLine = <p>Welcome back, {props.currentUser.firstName}.</p>
   } else {
     lastLine = <p>If you're new to <strong>Polity</strong>, you can <a href="/sign-up">sign up here.</a></p>
   }
