@@ -1,8 +1,10 @@
 import React from 'react'
-import { change, reduxForm } from 'redux-form'
+import { change, reduxForm, reset } from 'redux-form'
 import { push } from 'react-router-redux'
 
 import SignInForm from '../components/SignInForm'
+
+import { flashNotice } from '../actions/flashNotice'
 import { createSession } from '../actions/createSession'
 
 let validate = fields => {
@@ -13,7 +15,11 @@ let validate = fields => {
 
 let onSubmit = (values, dispatch) => {
   return dispatch(createSession(values))
-  .then(dispatch(push('/')))
+  .then(data => { dispatch(push('/')) })
+  .catch(error => {
+    dispatch(reset('signIn'))
+    dispatch(flashNotice({ alert: error.errors._error }))
+  })
 }
 
 const SignInFormContainer = props => {

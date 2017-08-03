@@ -14,9 +14,11 @@ import thunkMiddleware from 'redux-thunk'
 
 import LandingPage from '../react/connectors/LandingPage'
 import NavigationBar from '../react/connectors/NavigationBar'
+import Notices from '../react/connectors/Notices'
 import SignIn from '../react/connectors/SignIn'
 
 import currentUser from '../react/reducers/currentUser'
+import notices from '../react/reducers/notices'
 
 const history = createBrowserHistory()
 
@@ -25,6 +27,7 @@ const middlewares = [thunkMiddleware, routerMiddleware(history)]
 const store = createStore(
   combineReducers({
     currentUser,
+    notices,
     form: formReducer,
     router: routerReducer
   }),
@@ -40,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <ConnectedRouter history={history}>
           <div>
             <Route path='/' component={NavigationBar} />
+            <Route path='/' component={Notices} />
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/sign-in' component={SignIn} />
           </div>

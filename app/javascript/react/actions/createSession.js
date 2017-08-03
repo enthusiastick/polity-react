@@ -1,9 +1,10 @@
-import { reset } from 'redux-form'
+import { SubmissionError } from 'redux-form'
 
 const FETCH_CREATE_SESSION = 'FETCH_CREATE_SESSION'
 const FETCH_CREATE_SESSION_SUCCESS = 'FETCH_CREATE_SESSION_SUCCESS'
+const FETCH_CREATE_SESSION_FAILURE = 'FETCH_CREATE_SESSION_FAILURE'
 
-export { FETCH_CREATE_SESSION, FETCH_CREATE_SESSION_SUCCESS }
+export { FETCH_CREATE_SESSION, FETCH_CREATE_SESSION_SUCCESS, FETCH_CREATE_SESSION_FAILURE }
 
 let fetchCreateSession = () => {
   return {
@@ -12,8 +13,16 @@ let fetchCreateSession = () => {
 }
 
 let fetchCreateSessionSuccess = currentUser => {
-  type: FETCH_CREATE_SESSION_SUCCESS,
-  currentUser
+  return {
+    type: FETCH_CREATE_SESSION_SUCCESS,
+    currentUser
+  }
+}
+
+let fetchCreateSessionFailure = () => {
+  return {
+    type: FETCH_CREATE_SESSION_FAILURE
+  }
 }
 
 let createSession = values => dispatch => {
@@ -27,13 +36,22 @@ let createSession = values => dispatch => {
   })
   .then(response => { return response.json() })
   .then(data => {
-    dispatch(reset('createSession'))
-    dispatch(fetchCreateSessionSuccess(data.user))
+    if (data.error) {
+      throw(data.error)
+    } else {
+      dispatch(fetchCreateSessionSuccess(data.user))
+    }
+    return data
+  })
+  .catch(error => {
+    dispatch(fetchCreateSessionFailure())
+    throw new SubmissionError({ '_error': error })
   })
 }
 
 export {
   fetchCreateSession,
   fetchCreateSessionSuccess,
+  fetchCreateSessionFailure,
   createSession
 }

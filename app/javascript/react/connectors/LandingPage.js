@@ -5,7 +5,7 @@ import Welcome from '../components/Welcome'
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser.currentUser
+    currentUser: state.currentUser.item
   }
 }
 

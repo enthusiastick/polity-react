@@ -6,7 +6,7 @@ import { getCurrentUser } from '../actions/getCurrentUser'
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser.currentUser
+    currentUser: state.currentUser.item
   }
 }
 
