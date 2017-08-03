@@ -1,3 +1,4 @@
+import humps from 'humps'
 import { SubmissionError } from 'redux-form'
 
 const FETCH_CREATE_SESSION = 'FETCH_CREATE_SESSION'
@@ -27,7 +28,7 @@ let fetchCreateSessionFailure = () => {
 
 let createSession = values => dispatch => {
   dispatch(fetchCreateSession())
-  let payload = JSON.stringify(values)
+  let payload = JSON.stringify(humps.decamelizeKeys(values))
   return fetch('api/v1/sessions.json', {
     credentials: 'same-origin',
     method: 'POST',

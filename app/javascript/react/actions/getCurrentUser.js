@@ -1,3 +1,5 @@
+import humps from 'humps'
+
 const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
 const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS'
 
@@ -24,7 +26,7 @@ let getCurrentUser = () => dispatch => {
     headers: { 'Content-Type': 'application/json' }
   })
   .then(response => { return response.json() })
-  .then(data => { dispatch(fetchCurrentUserSuccess(data.user)) })
+  .then(data => { dispatch(fetchCurrentUserSuccess(humps.camelizeKeys(data.user))) })
 }
 
 export {
