@@ -1,4 +1,4 @@
-import { FLASH_NOTICE } from '../actions/flashNotice'
+import { CLEAR_NOTICES, FLASH_NOTICE } from '../actions/flashNotice'
 
 let initialState = {
   item: {}
@@ -6,6 +6,8 @@ let initialState = {
 
 const notices = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_NOTICES:
+      return Object.assign({}, state, { item: {} })
     case FLASH_NOTICE:
       let newItem = Object.assign({}, state.item, action.notice)
       return Object.assign({}, state, { item: newItem })

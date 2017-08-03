@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 
 import SignInForm from '../components/SignInForm'
 
-import { flashNotice } from '../actions/flashNotice'
+import { clearNotices, flashNotice } from '../actions/flashNotice'
 import { createSession } from '../actions/createSession'
 
 let validate = fields => {
@@ -15,9 +15,14 @@ let validate = fields => {
 
 let onSubmit = (values, dispatch) => {
   return dispatch(createSession(values))
-  .then(data => { dispatch(push('/')) })
+  .then(data => {
+    dispatch(clearNotices())
+    dispatch(flashNotice({ success: `Signed in as ${data.user.handle}.` }))
+    dispatch(push('/'))
+  })
   .catch(error => {
     dispatch(reset('signIn'))
+    dispatch(clearNotices())
     dispatch(flashNotice({ alert: error.errors._error }))
   })
 }
