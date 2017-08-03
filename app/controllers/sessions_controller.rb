@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  before_action :prevent_duplicate_sign_in, only: [:create, :new]
+  before_action :prevent_duplicate_sign_in, only: [:create]
 
   def create
     if params[:session][:login].match(User::EMAIL_REGEXP)

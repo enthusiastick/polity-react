@@ -5,7 +5,7 @@ import SignInFormContainer from '../forms/SignInFormContainer'
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser.currentUser
+    currentUser: state.currentUser.item
   }
 }
 
