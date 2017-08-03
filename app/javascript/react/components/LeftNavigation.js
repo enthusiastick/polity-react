@@ -4,7 +4,7 @@ const LeftNavigation = props => {
   let link, text
 
   if (props.currentUser.id) {
-    link = <li><a href=''>{props.currentUser.handle}</a></li>
+    link = <li><a href={`/users/${props.currentUser.handle}/edit`}>{props.currentUser.handle}</a></li>
     text = 'Signed in as:'
   } else {
     text = 'Not signed in.'
