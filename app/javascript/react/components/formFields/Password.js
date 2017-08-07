@@ -1,19 +1,29 @@
 import React from 'react'
 
 const Password = props => {
-  return(
-    <fieldset>
+  let { name, label } = props
+  let labelElement
+
+  if (props.showForgotLink) {
+    labelElement = (
       <div className='row'>
         <div className='small-3 medium-1 columns'>
-          <label htmlFor='password'>Password</label>
+          <label htmlFor={name}>{props.label}</label>
         </div>
         <div className='small-9 medium-11 columns'>
           <label>
             <a href='password_resets/new'>Forgot your password?</a>
           </label>
         </div>
-      </div>
-      <input id='password' type='password' {...props.input} />
+      </div>)
+  } else {
+    labelElement = <label htmlFor={name}>{label}</label>
+  }
+
+  return(
+    <fieldset>
+      {labelElement}
+      <input id={name} type='password' {...props.input} />
     </fieldset>
   )
 }

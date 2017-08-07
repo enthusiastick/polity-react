@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   prepend_before_action :check_captcha, only: :create
   before_action :authenticate_user!, only: [:edit, :update]
-  before_action :prevent_duplicate_sign_in, only: [:create, :new]
+  before_action :prevent_duplicate_sign_in, only: [:create]
 
   def create
     @user = User.new(user_params)

@@ -3,9 +3,9 @@ import { Field } from 'redux-form'
 import { push } from 'react-router-redux'
 import { flashNotice } from '../actions/flashNotice'
 
-import Login from '../components/formFields/Login'
 import Password from '../components/formFields/Password'
 import RememberMe from '../components/formFields/RememberMe'
+import TextInput from '../components/formFields/TextInput'
 
 class SignInForm extends Component {
   constructor(props) {
@@ -26,12 +26,12 @@ class SignInForm extends Component {
           <h1 className='text-center top-padded'>Sign In</h1>
           <form onSubmit={this.props.handleSubmit}>
             <div className='form-inputs'>
-              <Field name='login' component={Login} />
-              <Field name='password' component={Password} />
+              <Field name='login' label='Email or username' component={TextInput} />
+              <Field name='password' label='Password' showForgotLink={true} component={Password} />
               <Field name='rememberMe' component={RememberMe} switchHandler={this.props.switchHandler} />
             </div>
             <div className='form-actions'>
-              <button className='button' type='submit' >Sign In</button>
+              <button className='button' type='submit'>Sign In</button>
               &nbsp;
               &nbsp;
               <a className='button' href='sign-up'>Sign Up</a>
