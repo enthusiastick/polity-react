@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "me", to: "users#show"
       resources :sessions, only: [:create]
-      resources :users, only: [] do
+      resources :users, only: [:create] do
         collection do
           resources :current, only: :index
         end
