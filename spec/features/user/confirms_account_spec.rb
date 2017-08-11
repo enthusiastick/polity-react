@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user confirms email account" do
+xfeature "user confirms email account" do
   scenario "register and confirm" do
     ActionMailer::Base.deliveries = []
     register_user

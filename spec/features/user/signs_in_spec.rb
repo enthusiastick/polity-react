@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user signs in" do
+xfeature "user signs in" do
 
   context "valid account" do
     let(:user) { create :user, confirmed_at: Time.current }

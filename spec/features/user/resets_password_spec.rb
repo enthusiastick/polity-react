@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user resets their password" do
+xfeature "user resets their password" do
   let(:user) { create(:user) }
 
   scenario "successfully sent email upon request" do

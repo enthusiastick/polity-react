@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user signs up" do
+xfeature "user signs up" do
   scenario "with invalid data" do
     visit sign_up_path
     click_button "Register"

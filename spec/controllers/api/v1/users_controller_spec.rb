@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Api::V1::UsersController, type: :controller do
+xdescribe Api::V1::UsersController, type: :controller do
   describe "#show" do
 
     context "registered user, with access token" do

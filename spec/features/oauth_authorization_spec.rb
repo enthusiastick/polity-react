@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user authorizes oauth client" do
+xfeature "user authorizes oauth client" do
   let(:user) { FactoryGirl.create(:user) }
   let(:app) { FactoryGirl.create(:oauth_application) }
   let(:client) { OAuth2::Client.new(app.uid, app.secret) }
