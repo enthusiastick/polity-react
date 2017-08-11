@@ -40,7 +40,7 @@ let createSession = values => dispatch => {
   .then(response => { return response.json() })
   .then(data => {
     if (data.error) {
-      throw(data.error)
+      throw data.error
     } else {
       dispatch(fetchCreateSessionSuccess(humps.camelizeKeys(data.user)))
     }

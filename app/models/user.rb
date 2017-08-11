@@ -56,6 +56,7 @@ class User < ApplicationRecord
   end
 
   def send_password_reset_email
+    self.generate_reset_digest
     UserMailer.password_reset(self.id, self.password_reset_token).deliver_now
   end
 
