@@ -1,6 +1,8 @@
 import humps from 'humps'
 import { SubmissionError } from 'redux-form'
 
+import polityUrl from '../constants/polityUrl'
+
 const FETCH_CREATE_SESSION = 'FETCH_CREATE_SESSION'
 const FETCH_CREATE_SESSION_SUCCESS = 'FETCH_CREATE_SESSION_SUCCESS'
 const FETCH_CREATE_SESSION_FAILURE = 'FETCH_CREATE_SESSION_FAILURE'
@@ -29,7 +31,7 @@ let fetchCreateSessionFailure = () => {
 let createSession = values => dispatch => {
   dispatch(fetchCreateSession())
   let payload = JSON.stringify(humps.decamelizeKeys(values))
-  return fetch('api/v1/sessions.json', {
+  return fetch(`${polityUrl}/api/v1/sessions.json`, {
     credentials: 'same-origin',
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

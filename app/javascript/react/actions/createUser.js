@@ -1,5 +1,6 @@
 import humps from 'humps'
 
+import polityUrl from '../constants/polityUrl'
 
 const FETCH_CREATE_USER = 'FETCH_CREATE_USER'
 const FETCH_CREATE_USER_SUCCESS = 'FETCH_CREATE_USER_SUCCESS'
@@ -30,7 +31,7 @@ let fetchCreateUserFailure = () => {
 let createUser = values => dispatch => {
   dispatch(fetchCreateUser())
   let payload = JSON.stringify(humps.decamelizeKeys(values))
-  return fetch('api/v1/users.json', {
+  return fetch(`${polityUrl}/api/v1/users.json`, {
     credentials: 'same-origin',
     method: 'POST',
     headers: { 'Content-Type': 'application/json'},

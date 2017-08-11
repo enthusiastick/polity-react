@@ -11,10 +11,10 @@ let validate = values => {
   const errors = {}
 
   if (!values.login) {
-    errors.login = 'Email or username can\'t be blank'
+    errors.login = 'can\'t be blank'
   }
   if (!values.password) {
-    errors.password = 'Password can\'t be blank'
+    errors.password = 'can\'t be blank'
   }
 
   return errors

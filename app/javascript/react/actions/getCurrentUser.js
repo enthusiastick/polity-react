@@ -1,5 +1,7 @@
 import humps from 'humps'
 
+import polityUrl from '../constants/polityUrl'
+
 const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
 const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS'
 
@@ -20,7 +22,7 @@ let fetchCurrentUserSuccess = currentUser => {
 
 let getCurrentUser = () => dispatch => {
   dispatch(fetchCurrentUser())
-  return fetch('api/v1/users/current.json', {
+  return fetch(`${polityUrl}/api/v1/users/current.json`, {
     credentials: 'same-origin',
     method: 'GET',
     headers: { 'Content-Type': 'application/json' }
