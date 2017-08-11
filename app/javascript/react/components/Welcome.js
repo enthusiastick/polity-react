@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Welcome = props => {
   let lastLine
@@ -6,7 +7,7 @@ const Welcome = props => {
   if (props.currentUser.id) {
     lastLine = <p>Welcome back, {props.currentUser.firstName}.</p>
   } else {
-    lastLine = <p>If you're new to <strong>Polity</strong>, you can <a href="/sign-up">sign up here.</a></p>
+    lastLine = <p>If you're new to <strong>Polity</strong>, you can <Link to='/sign-up'>sign up here.</Link></p>
   }
 
   return(

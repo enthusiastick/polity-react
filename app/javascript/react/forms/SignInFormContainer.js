@@ -7,8 +7,15 @@ import SignInForm from '../containers/SignInForm'
 import { clearNotices, flashNotice } from '../actions/flashNotice'
 import { createSession } from '../actions/createSession'
 
-let validate = fields => {
+let validate = values => {
   const errors = {}
+
+  if (!values.login) {
+    errors.login = 'Email or username can\'t be blank'
+  }
+  if (!values.password) {
+    errors.password = 'Password can\'t be blank'
+  }
 
   return errors
 }

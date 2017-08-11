@@ -1,5 +1,5 @@
 import humps from 'humps'
-import { SubmissionError } from 'redux-form'
+
 
 const FETCH_CREATE_USER = 'FETCH_CREATE_USER'
 const FETCH_CREATE_USER_SUCCESS = 'FETCH_CREATE_USER_SUCCESS'
@@ -39,15 +39,15 @@ let createUser = values => dispatch => {
   .then(response => { return response.json() })
   .then(data => {
     if (data.error) {
-      throw(data.error)
+      throw data.error
     } else {
       dispatch(fetchCreateUserSucess(humps.camelizeKeys(data.user)))
     }
     return data
   })
-  .catch(error => {
+  .catch(errors => {
     dispatch(fetchCreateUserFailure())
-    throw new SubmissionError({ '_error': error })
+    throw errors
   })
 }
 

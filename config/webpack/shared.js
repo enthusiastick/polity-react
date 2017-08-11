@@ -3,6 +3,18 @@
 /* eslint global-require: 0 */
 /* eslint import/no-dynamic-require: 0 */
 
+const dotenv = require('dotenv');
+
+const dotenvFiles = [
+  `.env.${process.env.NODE_ENV}.local`,
+  '.env.local',
+  `.env.${process.env.NODE_ENV}`,
+  '.env'
+];
+dotenvFiles.forEach((dotenvFile) => {
+  dotenv.config({ path: dotenvFile, silent: true });
+});
+
 const webpack = require('webpack')
 const { basename, dirname, join, relative, resolve } = require('path')
 const { sync } = require('glob')

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
+import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
+
 import { flashNotice } from '../actions/flashNotice'
 
 import Password from '../components/formFields/Password'
@@ -31,10 +33,10 @@ class SignInForm extends Component {
               <Field name='rememberMe' component={RememberMe} switchHandler={this.props.switchHandler} />
             </div>
             <div className='form-actions'>
-              <button className='button' type='submit'>Sign In</button>
+              <button className='button' disabled={this.props.submitting} type='submit'>Sign In</button>
               &nbsp;
               &nbsp;
-              <a className='button' href='sign-up'>Sign Up</a>
+              <Link className='button' to='/sign-up'>Sign Up</Link>
             </div>
           </form>
         </div>

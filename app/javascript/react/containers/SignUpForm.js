@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import { push } from 'react-router-redux'
+
 import { flashNotice } from '../actions/flashNotice'
 
 import Password from '../components/formFields/Password'
@@ -41,7 +42,7 @@ class SignUpForm extends Component {
               <Field name='reCaptchaResponse' component={ReCaptcha} />
             </div>
             <div className='form-actions'>
-              <button className='button' type='submit'>Register</button>
+              <button className='button' disabled={this.props.submitting} type='submit'>Register</button>
             </div>
           </form>
         </div>

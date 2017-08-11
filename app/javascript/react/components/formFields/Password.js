@@ -1,14 +1,14 @@
 import React from 'react'
 
 const Password = props => {
-  let { name, label } = props
+  let { label, meta: { error, touched }, name } = props
   let labelElement
 
   if (props.showForgotLink) {
     labelElement = (
       <div className='row'>
         <div className='small-3 medium-1 columns'>
-          <label htmlFor={name}>{props.label}</label>
+          <label className={ touched && error && 'is-invalid-label' } htmlFor={name}>{label}</label>
         </div>
         <div className='small-9 medium-11 columns'>
           <label>
@@ -17,13 +17,14 @@ const Password = props => {
         </div>
       </div>)
   } else {
-    labelElement = <label htmlFor={name}>{label}</label>
+    labelElement = <label className={ touched && error && 'is-invalid-label' } htmlFor={name}>{label}</label>
   }
 
   return(
     <fieldset>
       {labelElement}
-      <input id={name} type='password' {...props.input} />
+      <input className={ touched && error && 'is-invalid-input' } id={name} type='password' {...props.input} />
+      { touched && error && <span className='form-error is-visible'>{error}</span> }
     </fieldset>
   )
 }
