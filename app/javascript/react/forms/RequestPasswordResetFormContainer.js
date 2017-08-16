@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, reset } from 'redux-form'
 import { push } from 'react-router-redux'
 
 import RequestPasswordResetForm from '../containers/RequestPasswordResetForm'
@@ -27,7 +27,7 @@ let onSubmit = (values, dispatch) => {
     dispatch(push('/'))
   })
   .catch(error => {
-    dispatch(reset('signIn'))
+    dispatch(reset('requestPasswordReset'))
     dispatch(clearNotices())
     dispatch(flashNotice({ alert: 'There was a problem resetting your password. Please try again.' }))
   })

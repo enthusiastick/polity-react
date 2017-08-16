@@ -1,6 +1,6 @@
 import humps from 'humps'
 
-import polityUrl from '../constants/polityUrl'
+import baseUrl from '../constants/baseUrl'
 
 const FETCH_CREATE_PASSWORD_RESET = 'FETCH_CREATE_PASSWORD_RESET'
 const FETCH_CREATE_PASSWORD_RESET_SUCCESS = 'FETCH_CREATE_PASSWORD_RESET_SUCCESS'
@@ -30,7 +30,7 @@ let fetchCreatePasswordResetFailure = () => {
 let createPasswordReset = values => dispatch => {
   dispatch(fetchCreatePasswordReset())
   let payload = JSON.stringify(humps.decamelizeKeys(values))
-  return fetch(`${polityUrl}/api/v1/password_resets.json`, {
+  return fetch(`${baseUrl}/api/v1/password_resets.json`, {
     credentials: 'same-origin',
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -50,7 +50,6 @@ let createPasswordReset = values => dispatch => {
     throw error
   })
 }
-
 
 export {
   fetchCreatePasswordReset,
