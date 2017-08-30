@@ -1,8 +1,7 @@
 require "rails_helper"
 
-xdescribe Api::V1::UsersController, type: :controller do
+describe Api::V1::UsersController, type: :controller do
   describe "#show" do
-
     context "registered user, with access token" do
       let(:user) { create(:user) }
       let(:token) { create(:oauth_token, resource_owner_id: user.id) }

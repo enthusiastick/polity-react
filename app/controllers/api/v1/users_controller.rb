@@ -17,7 +17,7 @@ class Api::V1::UsersController < Api::ApiController
   end
 
   def show
-    render json: authorized_user
+    render json: authorized_user, adapter: :attributes
   end
 
   def update
