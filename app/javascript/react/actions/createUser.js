@@ -34,7 +34,7 @@ let createUser = values => dispatch => {
   return fetch(`${baseUrl}/api/v1/users.json`, {
     credentials: 'same-origin',
     method: 'POST',
-    headers: { 'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: payload
   })
   .then(response => { return response.json() })

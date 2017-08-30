@@ -1,5 +1,6 @@
 class Api::V1::UsersController < Api::ApiController
   before_action :doorkeeper_authorize!, only: [:show]
+  before_action :authenticate_user_api!, only: [:update]
 
   def create
     checker = ReCaptchaChecker.new(params[:re_captcha_response])
@@ -19,7 +20,31 @@ class Api::V1::UsersController < Api::ApiController
     render json: authorized_user
   end
 
+  def update
+    if !current_user.authenticate(params[:password])
+      current_user.errors.add(:password, :invalid)
+      render json: { error: current_user.errors }, status: :unprocessable_entity
+    else
+      current_user.assign_attributes(update_params)
+      if current_user.changed.include?("email") && current_user.valid?
+        current_user.confirmed_at = nil
+        current_user.send(:generate_confirmation_digest)
+        sign_out
+        # Please confirm your email to re-activate your account.
+      end
+      if current_user.save
+        render json: current_user
+      else
+        render json: { error: current_user.errors }, status: :unprocessable_entity
+      end
+    end
+  end
+
   protected
+
+  def update_params
+    params.require(:user).permit(:email, :first_name, :last_name)
+  end
 
   def user_params
     params.require(:user).permit(:handle, :email, :first_name, :last_name)

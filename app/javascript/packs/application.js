@@ -12,6 +12,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
 
+import EditUser               from '../react/connectors/EditUser'
 import LandingPage            from '../react/connectors/LandingPage'
 import NavigationBar          from '../react/connectors/NavigationBar'
 import Notices                from '../react/connectors/Notices'
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <Route path='/' component={Notices} />
             <Route exact path='/' component={LandingPage} />
             <Route path='/password_resets/:passwordResetId/edit' component={PasswordReset} />
+            <Route exact path='/edit-user' component={EditUser} />
             <Route exact path='/password_resets/new' component={RequestPasswordReset} />
             <Route exact path='/sign-in' component={SignIn} />
             <Route exact path='/sign-up' component={SignUp} />
