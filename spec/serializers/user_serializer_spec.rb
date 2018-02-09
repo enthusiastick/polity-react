@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe UserSerializer do
+describe UserSerializer do
 
   let(:uuid) { "00000000-1111-222222222-333333333333" }
 
@@ -13,7 +13,7 @@ xdescribe UserSerializer do
     universally_unique_id: uuid
   }
 
-  let(:payload) { JSON.parse(UserSerializer.new(user).to_json)["user"] }
+  let(:payload) { JSON.parse(UserSerializer.new(user).to_json) }
 
   describe "serializes a user" do
     it "returns the user uuid, email, handle, and first & last names" do
